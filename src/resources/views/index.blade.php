@@ -24,7 +24,7 @@
 
 
 <div class="todo__content">
-    <form class="create-form">
+    <form class="create-form" action="/todos" method="POST">
         @csrf
         <div class="create-form__item">
             <input type="text" class="create-form__item-input" name="content">
@@ -45,16 +45,20 @@
                         @method('PATCH')
                         @csrf
                         <div class="update-form__item">
-                            <input type="text" style="width:300px; display:inline-block;" class="update-form__item-input" name="content" value="{{$todo['content']}}">
+                            <input type="text" class="update-form__item-input" name="content" value="{{$todo['content']}}">
                             <input type="hidden" name="id" value="{{$todo['id']}}">
+                        </div>
                         <div class="update-form__button">
                             <button class="update-form__button-submit" type="submit">更新</button>
                         </div>
                     </form>
                 </td>
                 <td class="todo-table__item">
-                    <form class="delete__form">
+                    <form class="delete__form" action="/todos/delete" method="POST">
+                        @method('DELETE')
+                        @csrf
                         <div class="delete-form__button">
+                            <input type="hidden" name="id" value="{{$todo['id']}}">
                             <button class="delete-form__button-submit" type="submit">削除</button>
                         </div>
                     </form>
